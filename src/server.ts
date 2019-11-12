@@ -2,6 +2,7 @@ import "reflect-metadata";
 import "./controller/BookController";
 import "./controller/HomeController";
 import "./controller/TestController";
+import "./controller/NikkeiController";
 
 import * as bodyParser from "body-parser";
 import * as express from "express";
