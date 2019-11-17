@@ -16,13 +16,14 @@ import { container } from "./inversify.config";
 import { DirUtils } from "./util/DirUtils";
 
 class Server {
-  port: number = 3000;
+  port = 3000;
+
   app: express.Application;
+
   constructor() {
     const server = new InversifyExpressServer(container);
     const swaggerUi = require("swagger-ui-express");
     const swaggerJSDoc = require("swagger-jsdoc");
-    // let dirutils = new DirUtils();
     const apis: string[] = DirUtils.getControllers();
     const models: string[] = DirUtils.getModels();
     const options = {
@@ -36,7 +37,7 @@ class Server {
     };
 
     server.setConfig(app => {
-      app.set("views", "./view");
+      app.set("views", "./src/view");
       app.set("view engine", "pug");
       // app.use(morgan("tiny"));
       // app.use(compression());

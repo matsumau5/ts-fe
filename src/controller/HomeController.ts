@@ -1,23 +1,20 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { inject, injectable } from "inversify";
-import {
-  controller,
-  httpDelete,
-  httpGet,
-  httpPost,
-  interfaces,
-  queryParam,
-  request,
-  requestParam,
-  response
-} from "inversify-express-utils";
+import { controller, httpGet } from "inversify-express-utils";
+import { PageInfo } from "../domain/model/PageInfo";
 
 @controller("/home")
 export class HomeController {
+  resObj: PageInfo = {
+    title: "Home",
+    description: "Homeページです。",
+    keywords: ["Home", "home"],
+    author: ""
+  };
   @httpGet("")
   public index(req: Request, res: Response): any {
     res.render("home", {
-      title: "Home"
+      data: { page: new PageInfo(this.resObj) }
     });
   }
 }

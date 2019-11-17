@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // disable requiring trailing commas because it might be nice to revert to
+    // being JSON at some point, and I don't want to make big changes now.
+    "import/no-unresolved": "off",
+    "comma-dangle": 0
+  }
+}
