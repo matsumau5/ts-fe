@@ -1,1 +1,7 @@
 extends layout/_default_layout
+block content
+  .content
+    h1 home!
+    ul
+      each item in data.result.data
+        li item #{item.id} : #{item.col1}

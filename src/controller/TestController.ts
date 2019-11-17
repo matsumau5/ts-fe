@@ -13,11 +13,13 @@ import {
   requestParam,
   response
 } from "inversify-express-utils";
+import { IControllerResponse } from "../helper/ControllerResponse";
+import { OK } from "http-status-codes";
 
 @controller("/api")
 export class TestController {
   @httpGet("/test")
-  public async test(): Promise<any> {
+  public async test(): Promise<IControllerResponse> {
     const data = "a";
     const options = {
       host: "192.168.0.23",
@@ -26,16 +28,12 @@ export class TestController {
     };
 
     const res = await axios.get("http://192.168.0.23:8080/ils-web/api/test");
-    // http
-    //   .get(options, function(res: any) {
-    //     console.log(res.data);
-    //   })
-    //   .on("error", function(e: any) {
-    //     console.log("Got error: " + e.message);
-    //   });
     console.log(res.data);
     // console.log(JSON.parse(res.data));
-
-    return res.data.col1;
+    return {
+      success: true,
+      statusCode: OK,
+      body: res.data
+    };
   }
 }
