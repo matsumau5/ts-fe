@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import paginate from "express-paginate";
 import "./controller/BookController";
 import "./controller/HomeController";
 import "./controller/TestController";
@@ -41,6 +42,7 @@ class Server {
       app.set("view engine", "pug");
       // app.use(morgan("tiny"));
       // app.use(compression());
+      app.use(paginate.middleware(10, 50));
       app.use("/spec", swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
       app.use(express.static("public"));
       app.use(

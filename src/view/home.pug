@@ -2,6 +2,13 @@ extends layout/_default_layout
 block content
   .content
     h1 home!
+    h2 結果:#{data.result.data.length}件
     ul
       each item in data.result.data
         li item #{item.id} : #{item.col1}
+    ul
+      each item in data.obj
+        if item.query != ''
+          li item #{item.name} : #{item.query}
+    ul.gnav
+      - for (var x = 0; x < 10; x++)
