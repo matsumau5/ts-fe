@@ -2,8 +2,10 @@ import { Request, Response } from "express";
 import { OK } from "http-status-codes";
 import { controller, httpGet } from "inversify-express-utils";
 
-import { BookServiceImpl } from "../domain/service/books/BookService";
+import BookService from "../domain/service/BookService";
 import { IControllerResponse } from "../helper/ControllerResponse";
+import { inject } from "inversify";
+import { Types } from "../config/di/types";
 
 /**
  * @swagger
@@ -20,13 +22,16 @@ import { IControllerResponse } from "../helper/ControllerResponse";
  */
 @controller("/books")
 export default class BookController {
+  constructor(
+    @inject(Types.BookService)
+    private service: BookService
+  ) {}
   @httpGet("")
   public async getBookList(
     req: Request,
     res: Response
   ): Promise<IControllerResponse> {
-    const service = new BookServiceImpl();
-    const books = await service.getAll();
+    const books = await this.service.getAll();
 
     return {
       success: true,

@@ -1,9 +1,12 @@
 "use strict";
 
 import { Client, ApiResponse, RequestParams } from "@elastic/elasticsearch";
+import { injectable } from "inversify";
+import { NikkeiRepository } from "../../domain/repository/NikkeiRepository";
 const client = new Client({ node: "http://192.168.0.19:9200" });
 
-export class NikkeiRepository {
+@injectable()
+export class NikkeiRepositoryImpl implements NikkeiRepository {
   public async findAllNikkei(): Promise<any> {
     // const doc1: RequestParams.Index = {
     //   index: "nikkei225",

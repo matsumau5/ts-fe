@@ -3,11 +3,7 @@ import { inject, injectable } from "inversify";
 import { IBookModelAttributes } from "../../domain/model/Book";
 import { ModelInstance } from "../../domain/model/ModelInstance";
 import { DB } from "../db";
-
-export interface BookRepository {
-  findAll(): Promise<ModelInstance[]>;
-  create(data: IBookModelAttributes): Promise<ModelInstance>;
-}
+import BookRepository from "../../domain/repository/BookRepository";
 
 @injectable()
 export class BookRepositoryImpl implements BookRepository {

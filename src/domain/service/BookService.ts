@@ -1,19 +1,22 @@
-import {
-  BookRepository,
-  BookRepositoryImpl
-} from "../../../infrastructure/repository/BookRepository";
-import { IBookModelAttributes, validateBook } from "../../model/Book";
-import { ModelInstance } from "../../model/ModelInstance";
+import { IBookModelAttributes, validateBook } from "../model/Book";
+import { ModelInstance } from "../model/ModelInstance";
+import { injectable, inject } from "inversify";
+import { Types } from "../../config/di/types";
+import BookRepository from "../repository/BookRepository";
 
 export default interface BookService {
   getAll: () => Promise<ModelInstance[]>;
+  addBook(body: IBookModelAttributes): Promise<string>;
 }
 
+@injectable()
 export class BookServiceImpl implements BookService {
-  public repository: BookRepository;
+  constructor(
+    @inject(Types.BookRepository)
+    private repository: BookRepository
+  ) {}
   public async getAll() {
-    const repository = new BookRepositoryImpl();
-    const model = await repository.findAll();
+    const model = await this.repository.findAll();
     return model;
   }
 

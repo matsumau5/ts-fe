@@ -2,10 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { OK } from "http-status-codes";
 import { controller, httpGet } from "inversify-express-utils";
 
-import BookService, {
-  BookServiceImpl
-} from "../domain/service/books/BookService";
-import { NikkeiRepository } from "../infrastructure/repository/NikkeiRepository";
+import { NikkeiRepository } from "../domain/repository/NikkeiRepository";
+import { inject } from "inversify";
+import { Types } from "../config/di/types";
 
 /**
  * @swagger
@@ -22,10 +21,13 @@ import { NikkeiRepository } from "../infrastructure/repository/NikkeiRepository"
  */
 @controller("/nikkei")
 export class NikkeiController {
+  constructor(
+    @inject(Types.NikkeiRepository)
+    private repository: NikkeiRepository
+  ) {}
   @httpGet("")
   public async getNikkeiList(req: Request, res: Response): Promise<any> {
-    const repository = new NikkeiRepository();
-    const nikkei = await repository.findAllNikkei();
+    const nikkei = await this.repository.findAllNikkei();
 
     return {
       success: true,

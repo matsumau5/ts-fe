@@ -9,7 +9,6 @@ import {
 import { PageInfo } from "../domain/model/PageInfo";
 import axios from "axios";
 import { TestInfo } from "../domain/model/TestInfo";
-import { string } from "@hapi/joi";
 
 @controller("/home")
 export class HomeController {

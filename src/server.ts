@@ -7,13 +7,9 @@ import "./controller/NikkeiController";
 
 import * as bodyParser from "body-parser";
 import * as express from "express";
-import {
-  interfaces,
-  InversifyExpressServer,
-  TYPE
-} from "inversify-express-utils";
+import { InversifyExpressServer } from "inversify-express-utils";
 
-import { container } from "./inversify.config";
+import { container } from "./config/di/inversify.config";
 import { DirUtils } from "./util/DirUtils";
 
 class Server {
